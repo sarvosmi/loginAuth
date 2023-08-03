@@ -1,0 +1,66 @@
+<ion-header [translucent]="true">
+  
+</ion-header>
+
+<ion-content [fullscreen]="true"> 
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="form-css">           
+      <ion-item lines="none">
+        <h3>Sign In</h3>
+      </ion-item>   
+     
+        <ion-label *ngIf="errorMsg" class="error">{{errorMsg}}</ion-label>
+    
+        <ion-list>
+          <div *ngFor="let validation of validation_messages.mobile">
+            <ion-label class="error" 
+            *ngIf="isSubmitted &&loginForm.get('mobile')?.hasError(validation.type)">
+            {{ validation.message }}
+            </ion-label>
+          </div>  
+          <div *ngFor="let validation of validation_messages.password">
+            <ion-label class="error" 
+            *ngIf="isSubmitted &&loginForm.get('password')?.hasError(validation.type)">
+            {{ validation.message }}
+            </ion-label>
+          </div>  
+          <div *ngFor="let validation of validation_messages.termsconditions">
+            <ion-label class="error" 
+            *ngIf="isSubmitted &&loginForm.get('termsconditions')?.hasError(validation.type)">
+            {{ validation.message }}
+            </ion-label>
+          </div>  
+        </ion-list>             
+                     
+      <ion-item no-padding lines="none">
+          <ion-input class="input-css" clearInput type="tel"
+              size="10" required  name="mobile" maxlength="10"
+              formControlName="mobile" tabindex="1" 
+              placeholder="Mobile"                          
+              autofocus  (keypress)="numberOnlyValidation($event)"></ion-input>
+      </ion-item>
+      <ion-item style="padding-bottom: 10px;" lines="none">
+          <ion-input type="password" class="input-css" 
+              name="password" maxlength="60"
+              placeholder="Password" formControlName="password" 
+              tabindex="2" ></ion-input>
+      </ion-item>
+      <ion-item lines="none" style="max-width: 190px;">
+            <ion-checkbox labelPlacement="end" class="termsconditions-css"
+              color="primary" formControlName="termsconditions">
+                Terms and Conditions
+          </ion-checkbox>
+       </ion-item>
+      <ion-item  lines="none" class="sitebtn">
+          <ion-button id="btnSpara" size="default"  tabindex="3"
+                type="submit">Login</ion-button>                          
+      </ion-item>
+      <ion-item  lines="none" style="font-size: 14px;">
+          <a  href="/signUp" tabindex="4" class="link-css">Register</a>
+          <span style="padding-right: 5px;padding-left: 10px; " >|</span>
+                                
+          <a href="#" tabindex="5" class="link-css" > Forgot Password ?</a>    
+      </ion-item>                      
+                 
+  </form>
+     
+</ion-content>

@@ -1,0 +1,91 @@
+
+<ion-content [fullscreen]="true">
+  
+  <div id="container">
+   
+    <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()"      
+      style="max-width: 350px;margin:auto; padding-top: 20px;" novalidate>
+        <h3>Sign up</h3>        
+          
+        <div *ngIf="submitError"
+          class="error" 
+          style="padding-top: 10px;padding-bottom: 10px;font-size: 12px; text-transform: capitalize;" >
+              {{submitError}}
+        </div>
+
+        <ion-item>
+          <ion-input type="text" label="Name" 
+          maxlength="60" size="10" required 
+          name="name" formControlName="name"></ion-input>  
+        </ion-item>  
+
+        <small *ngFor="let validation of validation_messages.name">
+          <div class="error" 
+            *ngIf="isSubmitted && registrationForm.get('name')?.hasError(validation.type)">
+            {{ validation.message }}
+          </div>
+        </small>
+       
+        <ion-item>
+          <ion-input type="text" label="Email" 
+          maxlength="55" size="10" required 
+          name="email" formControlName="email"></ion-input>  
+        </ion-item>  
+
+        <small *ngFor="let validation of validation_messages.email">
+          <div class="error" 
+            *ngIf="isSubmitted && registrationForm.get('email')?.hasError(validation.type)">
+            {{ validation.message }}
+          </div>
+        </small>
+
+        <ion-item>
+          <ion-input type="text" label="Mobile" 
+          maxlength="10" minlength="10" required 
+          name="mobile" formControlName="mobile"></ion-input>  
+        </ion-item>  
+        
+        <small *ngFor="let validation of validation_messages.mobile">
+          <div class="error" 
+            *ngIf="isSubmitted && registrationForm.get('mobile')?.hasError(validation.type)">
+            {{ validation.message }}
+          </div>
+        </small>
+
+        <ion-item>
+          <ion-input type="text" label="Password" 
+          maxlength="25"  required  type="password"
+          name="password" formControlName="password"></ion-input>  
+        </ion-item>    
+        
+        <small *ngFor="let validation of validation_messages.password">
+          <div class="error" 
+            *ngIf="isSubmitted && registrationForm.get('password')?.hasError(validation.type)">
+            {{ validation.message }}
+          </div>
+        </small>
+
+        <ion-item>
+          <ion-input type="text" label="Confirm Password" 
+          maxlength="25" size="10" required  type="password"
+          name="confirmPassword" formControlName="confirmPassword"></ion-input>  
+        </ion-item> 
+        
+        <small *ngFor="let validation of validation_messages.confirmPassword">
+          <div class="error" 
+            *ngIf="isSubmitted && registrationForm.get('confirmPassword')?.hasError(validation.type)">
+            {{ validation.message }}
+          </div>
+        </small>
+        
+        <ion-item lines="none">
+          <ion-button type="submit" style="width:100%">Submit</ion-button>
+         
+        </ion-item>   
+        <ion-item>
+          <label>Already having an account ? <a href="/login">Login now</a></label>
+        </ion-item>
+
+    </form>
+  </div>
+</ion-content>
